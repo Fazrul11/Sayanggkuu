@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love World 💖</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+}
+
+/* 🎥 VIDEO BACKGROUND */
+#bgVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+/* overlay biar nampak cantik */
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    z-index: 0;
+}
+
+/* LOGIN */
+#login {
+    margin-top: 120px;
+    position: relative;
+    z-index: 2;
+}
+
+input {
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    text-align: center;
+}
+
+button {
+    padding: 12px 25px;
+    font-size: 18px;
+    border: none;
+    border-radius: 12px;
+    margin-top: 10px;
+    cursor: pointer;
+    background: white;
+    color: purple;
+    font-weight: bold;
+}
+
+/* APP */
+#app {
+    display: none;
+    position: relative;
+    z-index: 2;
+    margin-top: 30px;
+}
+
+img {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 0 30px white;
+    transition: transform 0.5s ease;
+}
+
+/* 🔥 zoom bila start */
+.big {
+    transform: scale(1.3);
+}
+
+/* 💖 hearts */
+.heart {
+    position: fixed;
+    top: -10px;
+    color: pink;
+    animation: fall linear;
+}
+
+@keyframes fall {
+    to {transform: translateY(110vh);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎥 VIDEO BACKGROUND -->
+<video autoplay muted loop id="bgVideo">
+    <source src="bg-video.mp4" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
+
+<!-- 🔐 LOGIN -->
+<div id="login">
+    <h1>🔐 Unlock Love World</h1>
+    <p>What do I call you? 💖</p>
+
+    <input type="text" id="pass" placeholder="Enter password...">
+    <br><br>
+
+    <button onclick="checkPass()">Unlock 💖</button>
+
+    <p id="error"></p>
+</div>
+
+<!-- 💖 APP -->
+<div id="app">
+    <h1>Hi My Love 💖</h1>
+
+    <img id="img" src="img1.jpg">
+
+    <br><br>
+
+    <button onclick="startLove()">ENTER LOVE WORLD 💖</button>
+</div>
+
+<!-- 🎵 MUSIC -->
+<audio id="music" loop>
+    <source src="love-story.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+let images = ["img1.jpg","img2.jpg","img3.jpg","img4.jpg","img5.jpg"];
+let i = 0;
+let interval;
+
+// 🔐 password
+function checkPass() {
+    let input = document.getElementById("pass").value;
+
+    if(input === "Baby") {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("app").style.display = "block";
+    } else {
+        document.getElementById("error").innerHTML = "Wrong password 💔";
+    }
+}
+
+// 💖 start love world
+function startLove() {
+
+    // 🎵 music
+    document.getElementById("music").play();
+
+    // 📸 slideshow
+    interval = setInterval(() => {
+        i = (i + 1) % images.length;
+
+        let img = document.getElementById("img");
+
+        // fade effect + zoom kecil
+        img.classList.add("big");
+
+        setTimeout(() => {
+            img.src = images[i];
+            img.classList.remove("big");
+        }, 300);
+
+    }, 2000);
+
+    // 💖 hearts
+    setInterval(createHeart, 150);
+
+    alert("Welcome to Love World 💖");
+}
+
+// 💖 hearts
+function createHeart() {
+    let h = document.createElement("div");
+    h.innerHTML = "💖";
+    h.classList.add("heart");
+
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.animationDuration = (Math.random() * 3 + 2) + "s";
+
+    document.body.appendChild(h);
+
+    setTimeout(() => h.remove(), 5000);
+}
+</script>
+
+</body>
+</html>
