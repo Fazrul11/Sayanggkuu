@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Love Story 💖</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: white;
+    overflow-x: hidden;
+
+    /* 💖 animated background */
+    background: linear-gradient(-45deg, #ff4d6d, #c77dff, #ff85a1, #7b2cbf);
+    background-size: 400% 400%;
+    animation: gradientBG 10s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+.container {
+    margin-top: 40px;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 28px;
+    text-shadow: 0 0 10px black;
+}
+
+p {
+    font-size: 18px;
+}
+
+img {
+    width: 240px;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 0 25px white;
+    transition: 0.5s;
+}
+
+button {
+    padding: 15px 25px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    margin-top: 20px;
+    cursor: pointer;
+    background: white;
+    color: purple;
+    font-weight: bold;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+/* 💖 hearts animation */
+.heart {
+    position: fixed;
+    top: -10px;
+    color: pink;
+    font-size: 20px;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh);
+    }
+}
+
+#slideshow {
+    display: none;
+    margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Hi My Love 💖</h1>
+    <p>This is our beautiful love story ✨</p>
+
+    <img id="mainImg" src="img1.jpg">
+
+    <br>
+
+    <button onclick="startLove()">YES 💖</button>
+
+    <div id="slideshow">
+        <h2>Our Memories 💕</h2>
+    </div>
+</div>
+
+<!-- MUSIC -->
+<audio id="music" loop>
+    <source src="love-story.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+let images = ["img1.jpg","img2.jpg","img3.jpg","img4.jpg","img5.jpg"];
+let i = 0;
+let interval;
+
+// 💖 start love story
+function startLove() {
+
+    // play music
+    document.getElementById("music").play();
+
+    // show slideshow text
+    document.getElementById("slideshow").style.display = "block";
+
+    // change images
+    interval = setInterval(() => {
+        i++;
+        if(i >= images.length) i = 0;
+        document.getElementById("mainImg").src = images[i];
+    }, 2000);
+
+    // hearts rain
+    setInterval(createHeart, 300);
+
+    alert("Welcome to our love world 💖");
+}
+
+// 💖 hearts effect
+function createHeart() {
+    let heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💖";
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 5000);
+}
+</script>
+
+</body>
+</html>
